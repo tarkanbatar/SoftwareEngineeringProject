@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <!-- Title of Browser Tab -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="The_Mapworks.css">
+        <title>The Mapworks</title>
+    </head>
+    <body style="background-color:#0099CC;">
+        <h1 class="text-center">The Mapworks</h1>
+        <!--
+        <div class="container generator">
+            <p>
+                We need:
+                <br>- Panels
+                <br>- Configurations
+                <br>- Generation
+                I would like to <span class="text-warning">highlight those words</span>.
+            </p>
+            <p id="selected">
+                Index Thing
+            </p>
+            <img src="mls2.JPG" alt="Location Sampler">
+        </div>
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Link with href
+          </a>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Button with data-target
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          </div>
+        </div>
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div id="collapse1" class="panel-collapse collapse">
+              <div class="panel-body">Panel Body</div>
+              <li><a class="nav-link active" href="/">Home</a></li>
+              <button data-theme="a" data-icon="grid" data-mini="true">Menu</button>
+              <div class="panel-footer">Panel Footer</div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+          </h4>
+        </div>
+        <a class="trigger_popup_fricc">Click here to show the popup</a>
+        <div class="hover_bkgr_fricc">
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">&times;</div>
+                <p>Add any HTML content<br />inside the popup box!</p>
+            </div>
+          </div>
+        <a href="#popupPanel" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Open panel</a>
+        <div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+            <button data-theme="a" data-icon="back" data-mini="true">Back</button>
+            <button data-theme="a" data-icon="grid" data-mini="true">Menu</button>
+            <button data-theme="a" data-icon="search" data-mini="true">Search</button>
+        </div>
+        -->
+        <div class="generation-window">
+          <canvas id="chunk"></canvas>
+            <script type="text/javascript" src="Generation/Parameters.js"></script>
+            <script type="text/javascript" src="Generation/Maths.js"></script>
+            <script type="text/javascript" src="Generation/NoiseGenerator.js"></script>
+            <script type="text/javascript" src="Generation/TerrainGenerator.js"></script>
+            <script type="text/javascript" src="Generation/Camera.js"></script>
+            <script type="text/javascript" src="Generation/Mesh.js"></script>
+            <script type="text/javascript" src="Generation/Pixel.js"></script>
+            <script type="text/javascript" src="Generation/Chunk.js"></script>
+            <script type="text/javascript" src="Generation/ChunkManager.js"></script>
+            <script type="text/javascript" src="Generation/World.js"></script>
+            <script type="text/javascript" src="Generation/Renderer.js"></script>
+            <script type="text/javascript" src="Generation/Application.js"></script>
+            <script type="text/javascript" src="Generation/Generate.js"></script>
+            <script type="text/javascript" src="Connect.js"></script>
+          <script>
+            function exportPDF() {
+              var canvas = document.getElementById("chunk");
+              var context = canvas.getContext("2d");
+              /*var imgData = canvas.toDataURL("image/png");*/
+              var imageData = context.getImageData(60, 60, 200, 100);
+              context.putImageData(imgData, 10, 70);
+              var doc = new jsPDF('p', 'mm');
+              doc.addImage(imgData, 'PNG', 10, 10);
+              doc.save('sample-file.pdf');
+              /*
+              var link = document.getElementById('chunks');
+              link.setAttribute('download', 'example.png');
+              link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+              link.click();
+              */
+              alert("Exported!");              
+            }
+          </script>
+        </div>
+        <div class="modal" id="modal1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">User Design Interface</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <!--
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                  -->
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">Amplitude</span>
+                    </div>
+                    <input type="text" placeholder="80" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">Octaves</span>
+                    </div>
+                    <input type="text" placeholder="9" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">Persistence</span>
+                    </div>
+                    <input type="text" placeholder="0.5" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">Smoothness</span>
+                    </div>
+                    <input type="text" placeholder="250" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <script>
+                  $(document).ready(function(){
+                    $('#customGen').click(function(){
+                      configs = {
+                          amplitude: document.getElementById('input_amplitude').value,
+                          octaves: document.getElementById('input_octaves').value,
+                          persistence: document.getElementById('input_persistence').value,
+                          smoothness: document.getElementById('input_smoothness').value
+                      }
+                      var noise_gen = new NoiseGenerator(Math.random(10000))
+                      noise_gen.setConfigs(configs)
+                      window.location.reload()
+                    });
+                  });
+                </script>
+                <button type="button" class="btn btn-secondary" onClick="window.location.reload();">Random Map</button>
+                <button type="button" id="customGen" class="btn btn-primary">Customized Map</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+            <div class="container">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav">
+                  <li><a class="btn nav-link" href="UserProfile/UserSignUpLogin/index.html">UserProfile</a></li>
+                  <!--
+                  <button class="btn nav-link" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    UDI
+                  </button>
+                  -->
+                  <button type="button" class="btn nav-link" data-toggle="modal" data-target="#modal1"> 
+                    UDI
+                  </button>
+                  <button type="button" class="btn nav-link" onclick="exportPDF()"> 
+                    Export
+                  </button>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </body>
+</html>
